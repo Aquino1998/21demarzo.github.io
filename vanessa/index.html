@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>21 DE MARZO VV</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('img/fondo.png'); /* Fondo de imagen */
+    background-size: cover;
+    background-position: center;
+  }
+
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo color rosa claro */
+    animation: slide 10s linear infinite;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  .heart {
+    width: 70px; /* Aumentar el tamaño de las imágenes */
+    height: 70px; /* Aumentar el tamaño de las imágenes */
+    position: absolute;
+    border-radius: 50%;
+    animation: fall 5s linear infinite;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-100vh) rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .card {
+    width: 300px;
+    background-color: rgba(242, 249, 250, 0.8); /* Fondo semi-transparente */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    background-color: hsl(64, 100%, 71%); /* Color botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  #moreInfo {
+    margin-top: 20px;
+  }
+
+  .centered-image {
+    width: 100px; /* Tamaño de la imagen */
+    height: 100px; /* Tamaño de la imagen */
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="background"></div>
+
+<div class="card">
+  <img src="img/chapoy.jpeg" alt="Imagen" class="centered-image">
+  <h2>Pvane,</h2>
+  <p>Espero que estés teniendo un hermoso día.</p>
+</div>
+
+<script>
+  function mostrarNumero() {
+    var numeroInfo = document.getElementById("numeroInfo");
+    numeroInfo.classList.remove("hidden");
+  }
+
+  // Arreglo de rutas de imágenes
+  var imagenes = [
+    "url('img/descargar.jpeg')",
+    "url('img/OIP (1).jpeg')", // Reemplaza con la ruta de tu segunda imagen
+    "url('img/OIP (2).jpeg')", // Reemplaza con la ruta de tu tercera imagen
+    "url('img/OIP.jpeg')"  // Reemplaza con la ruta de tu cuarta imagen
+  ];
+
+  // Crear lluvia de imágenes
+  function crearLluviaDeImagenes() {
+    var imagesContainer = document.createElement('div');
+    imagesContainer.style.position = 'fixed';
+    imagesContainer.style.top = '0';
+    imagesContainer.style.left = '0';
+    imagesContainer.style.width = '100%';
+    imagesContainer.style.height = '100%';
+    imagesContainer.style.pointerEvents = 'none';
+    document.body.appendChild(imagesContainer);
+
+    setInterval(function() {
+      var image = document.createElement('div');
+      image.className = 'heart'; // Usa una clase adecuada para tu imagen
+      image.style.left = Math.random() * 100 + 'vw';
+      image.style.backgroundImage = imagenes[Math.floor(Math.random() * imagenes.length)]; // Selecciona una imagen aleatoria
+      image.style.backgroundSize = 'cover';
+      imagesContainer.appendChild(image);
+
+      setTimeout(function() {
+        image.remove();
+      }, 5000);
+    }, 500);
+  }
+
+  window.onload = function() {
+    crearLluviaDeImagenes();
+  };
+</script>
+
+</body>
+</html>
